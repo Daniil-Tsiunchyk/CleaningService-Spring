@@ -4,6 +4,7 @@
     <title>Список заявок</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         .table-responsive {
             overflow-x: auto;
@@ -25,10 +26,10 @@
                     <a class="nav-link" href="/table-users">Пользователи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/table-inventory">Персонал</a>
+                    <a class="nav-link" href="/table-inventory">Инвентарь</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/table-employees">Инвентарь</a>
+                    <a class="nav-link" href="/table-employees">Персонал</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Выйти</a>
@@ -48,7 +49,7 @@
                         <th>Статус</th>
                         <th>Работники</th>
                         <th>Инвентарь</th>
-                        <th></th>
+                        <th>Действия</th>
 
                     </tr>
                     </thead>
@@ -84,21 +85,23 @@
                                 </select>
                             </td>
                             <input type="hidden" name="requestId" th:value="${request.id}">
-                            <td>
-                                <button type="submit" class="btn btn-primary">Обновить</button>
-                            </td>
+<!--                            <td>-->
+<!--                                <button type="submit" class="btn btn-primary">Обновить</button>-->
+<!--                            </td>-->
                         </form>
                         <td>
-                            <a th:href="@{/edit-request/{id}(id=${request.id})}"
-                               class="btn btn-primary">Редактировать</a>
+                            <a th:href="@{/edit-request/{id}(id=${request.id})}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                         </td>
                         <td>
                             <form th:action="@{/delete-request/{id}(id=${request.id})}" method="post">
-                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                <button type="submit" style="background: none; border: none;">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class UserController {
@@ -70,16 +71,15 @@ public class UserController {
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser(@RequestParam("userId") Long userId, HttpSession session) {
+    public String deleteUser(@ModelAttribute User user, HttpSession session) {
         User currentUser = (User) session.getAttribute("loggedInUser");
 
-        if (currentUser != null && currentUser.getId() != userId) {
-            userService.deleteUserById(userId);
+        if (currentUser != null && !Objects.equals(currentUser.getId(), user.getId())) {
+            userService.deleteUserById(user.getId());
         }
 
         return "redirect:/table-users";
     }
-
 
 }
 

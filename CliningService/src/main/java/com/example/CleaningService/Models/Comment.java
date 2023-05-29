@@ -3,6 +3,7 @@ package com.example.CleaningService.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "comments")
@@ -18,11 +19,11 @@ public class Comment {
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cleaning_request_id")
     private CleaningRequest cleaningRequest;
 

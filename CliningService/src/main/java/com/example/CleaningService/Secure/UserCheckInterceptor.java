@@ -12,7 +12,8 @@ public class UserCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+
+        User user = (User) session.getAttribute("admin");
         if (user == null) {
             response.sendRedirect("/login");
             return false;

@@ -4,6 +4,7 @@
     <title>Мои заказы</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
 <div class="container">
@@ -11,7 +12,7 @@
         <div class="col-sm-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link " href="/profile">Оставить заявку</a>
+                    <a class="nav-link " href="/profile">Мой профиль</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
@@ -38,6 +39,8 @@
                     <th scope="col">Цена</th>
                     <th scope="col">Статус заказа</th>
                     <th scope="col">Дата</th>
+                    <th scope="col">Действия</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -48,15 +51,6 @@
                     <td th:text="${request.service.price + 'руб.'}"></td>
                     <td th:text="${request.status}"></td>
                     <td th:text="${request.dateTime}"></td>
-                    <td>
-                        <ul>
-                            <li th:each="comment : ${commentsForRequests.get(request)}">
-                                <span th:text="${comment.user.name}"></span>
-                                <span th:text="${comment.dateTime}"></span>
-                                <p th:text="${comment.content}"></p>
-                            </li>
-                        </ul>
-                    </td>
                     <td>
                         <i class="fas fa-pencil-alt" onclick="showAlert()"></i>
                         <i class="fas fa-times" onclick="showAlert()"></i>

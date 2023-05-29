@@ -48,7 +48,7 @@
                     <td th:text="${inventory.name}"></td>
                     <td th:text="${inventory.quantity}"></td>
                     <td>
-                        <a th:href="@{/edit-inventory/(id=${inventory.id})}" class="btn btn-primary">Редактировать</a>
+                        <a th:href="@{/edit-inventory/{id}(id=${inventory.id})}" class="btn btn-primary">Редактировать</a>
                     </td>
                     <td>
                         <a th:href="@{/delete-inventory/{id}(id=${inventory.id})}" class="btn btn-danger">Удалить</a>

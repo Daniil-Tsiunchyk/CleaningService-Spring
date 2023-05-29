@@ -33,18 +33,18 @@
         <div class="col-sm-9">
             <h1>Пользователи</h1>
             <a class="btn btn-primary" href="/add-admin">Добавить администратора</a>
+
+
             <form action="/table-users" method="get">
                 <div class="form-group">
                     <label for="userSelect">Выберите пользователя</label>
-                    <select class="form-control" id="userSelect" name="userId" onchange="this.form.submit()"
-                            required>
+                    <select class="form-control" id="userSelect" name="userId" onchange="this.form.submit()" required>
                         <option disabled selected value="">Выберите пользователя...</option>
                         <option th:each="user : ${users}"
                                 th:classappend="${selectedUser != null && user.id == selectedUser.id} ? 'selected-user' : ''"
                                 th:selected="${selectedUser != null && user.id == selectedUser.id}"
                                 th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"
                                 th:value="${user.id}"></option>
-
                     </select>
                 </div>
                 <div class="form-group" th:if="${selectedUser != null}">
@@ -60,15 +60,18 @@
                     <img th:src="@{'/' + ${selectedUser.avatarUrl}}" alt="User Avatar" width="100" height="100"/>
                 </div>
             </form>
-
-            <form action="/deleteUser" method="post">
-                <div class="form-group" th:if="${selectedUser != null}">
-                    <input type="hidden" name="userId" th:value="${selectedUser.id}">
-                    <button type="submit" class="btn btn-danger">Удалить пользователя</button>
-                </div>
-            </form>
-
-
+            <!--            <form action="/deleteUser" method="post">-->
+            <!--                <div class="form-group">-->
+            <!--                    <label for="userDeleteSelect">Удалить пользователя</label>-->
+            <!--                    <select class="form-control" id="userDeleteSelect" name="userId" onchange="this.form.submit()"-->
+            <!--                            required>-->
+            <!--                        <option disabled selected value="">Выберите пользователя...</option>-->
+            <!--                        <option th:each="user : ${users}"-->
+            <!--                                th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"-->
+            <!--                                th:value="${user.id}"></option>-->
+            <!--                    </select>-->
+            <!--                </div>-->
+            <!--            </form>-->
         </div>
     </div>
 </div>

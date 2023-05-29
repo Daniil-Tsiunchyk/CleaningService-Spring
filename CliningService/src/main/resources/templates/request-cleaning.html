@@ -52,13 +52,11 @@
                 <input name="serviceId" th:value="${selectedService.id}" type="hidden">
                 <div class="form-group">
                     <label for="datetimeInput">Дата и время</label>
-                    <input class="form-control" id="datetimeInput" name="dateTime" required type="datetime-local">
+                    <input class="form-control" id="datetimeInput" name="dateTime" required type="datetime-local"
+                           th:min="${now}" th:max="${monthAhead}">
                 </div>
                 <button class="btn button-best" data-action="modal" data-modal="modal" data-ym_goal="kalkul"
                         type="submit">
-                    <svg class="flare" viewBox="0 0 1 1">
-                        <rect x="0" y="0" width="1" height="1" fill="transparent"/>
-                    </svg>
                     Оставить заявку
                 </button>
             </form>

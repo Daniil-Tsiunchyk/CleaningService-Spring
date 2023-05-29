@@ -57,15 +57,13 @@
                                 <p th:text="${comment.content}"></p>
                             </li>
                         </ul>
-                        <form th:action="@{/add-comment}" method="post" class="form-group">
+                        <form th:if="${!userCommented.get(request)}" th:action="@{/add-comment}" method="post"
+                              class="form-group">
                             <input type="hidden" name="requestId" th:value="${request.id}"/>
                             <label for="content" class="form-label mt-4">Оставить комментарий</label>
                             <textarea name="content" class="form-control" id="content" rows="3"></textarea>
                             <button class="btn button-best" data-action="modal" data-modal="modal" data-ym_goal="kalkul"
                                     type="submit">
-                                <svg class="flare" viewBox="0 0 1 1">
-                                    <rect x="0" y="0" width="1" height="1" fill="transparent"/>
-                                </svg>
                                 Оставить комментарий
                             </button>
                         </form>

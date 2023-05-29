@@ -7,12 +7,15 @@ import com.example.CleaningService.Models.User;
 import com.example.CleaningService.Repositories.CleaningRequestRepository;
 import com.example.CleaningService.Repositories.CommentRepository;
 import com.example.CleaningService.Repositories.ServiceRepository;
+import com.example.CleaningService.Repositories.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,22 +30,36 @@ public class CleaningController {
     private CleaningRequestRepository cleaningRequestRepository;
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/request-cleaning")
     public String showRequestCleaningForm(@RequestParam(value = "serviceId", required = false) Integer serviceId, Model model) {
         List<Service> services = serviceRepository.findAll();
         model.addAttribute("services", services);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+        LocalDateTime now = LocalDateTime.now();
+        String nowFormatted = now.format(formatter);
+        model.addAttribute("now", nowFormatted);
+
+        LocalDateTime monthAhead = now.plusMonths(1);
+        String monthAheadFormatted = monthAhead.format(formatter);
+        model.addAttribute("monthAhead", monthAheadFormatted);
+
         if (serviceId != null) {
             Service selectedService = serviceRepository.findById(serviceId).orElse(null);
             model.addAttribute("selectedService", selectedService);
         }
+
         return "/request-cleaning";
     }
+
 
     @PostMapping("/submitRequest")
     public String submitCleaningRequest(@RequestParam("serviceId") int serviceId,
                                         @RequestParam("dateTime") String dateTime,
-                                        @ModelAttribute("user") User user,
                                         HttpSession session) {
 
         CleaningRequest request = new CleaningRequest();
@@ -55,10 +72,14 @@ public class CleaningController {
         if (sessionUser == null) {
             return "redirect:/login";
         }
+        User freshUser = userRepository.findById((long) sessionUser.getId()).orElse(null);
+        if (freshUser == null) {
+            return "redirect:/login";
+        }
 
         request.setService(service);
         request.setDateTime(dateTime);
-        request.setUser(sessionUser);
+        request.setUser(freshUser);
         request.setStatus("В обработке");
         request.setComments(null);
         request.setEmployee(null);
@@ -99,14 +120,20 @@ public class CleaningController {
             model.addAttribute("requests", userRequests);
 
             Map<CleaningRequest, List<Comment>> commentsForRequests = new HashMap<>();
+            Map<CleaningRequest, Boolean> userCommented = new HashMap<>();
             for (CleaningRequest request : userRequests) {
                 List<Comment> comments = commentRepository.findByCleaningRequest(request);
                 commentsForRequests.put(request, comments);
+
+                boolean hasCommented = comments.stream().anyMatch(comment -> comment.getUser().equals(user));
+                userCommented.put(request, hasCommented);
             }
             model.addAttribute("commentsForRequests", commentsForRequests);
+            model.addAttribute("userCommented", userCommented);
 
             return "user-archive";
         }
     }
+
 
 }

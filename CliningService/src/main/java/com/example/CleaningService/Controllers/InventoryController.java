@@ -44,14 +44,18 @@ public class InventoryController {
         return "edit-inventory";
     }
 
-    @PostMapping("/edit-inventory")
-    public String updateInventory(@ModelAttribute Inventory inventory) {
-        inventoryRepository.save(inventory);
+    @PostMapping("/edit-inventory/{id}")
+    public String updateInventory(@PathVariable("id") long id, @ModelAttribute Inventory inventory) {
+        Inventory existingInventory = inventoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid service Id:" + id));
+        existingInventory.setName(inventory.getName());
+        existingInventory.setQuantity(inventory.getQuantity());
+        inventoryRepository.save(existingInventory);
         return "redirect:/table-inventory";
     }
 
+
     @GetMapping("/delete-inventory/{id}")
-    public String deleteInventory(@PathVariable("id") long id, Model model) {
+    public String deleteInventory(@PathVariable("id") long id) {
         Inventory inventory = inventoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid service Id:" + id));
         inventoryRepository.delete(inventory);
         return "redirect:/table-inventory";

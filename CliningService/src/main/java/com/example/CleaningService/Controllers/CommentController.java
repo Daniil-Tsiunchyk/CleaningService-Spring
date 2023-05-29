@@ -39,7 +39,7 @@ public class CommentController {
         comment.setCleaningRequest(request);
         commentRepository.save(comment);
 
-        return "redirect:/user-requests";
+        return "redirect:/user-archive";
     }
 
 }

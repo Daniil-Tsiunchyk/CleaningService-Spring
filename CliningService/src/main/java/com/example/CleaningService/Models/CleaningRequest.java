@@ -27,10 +27,11 @@ public class CleaningRequest {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
+
     @Column(name = "dateTime")
     private String dateTime;
 
-    @OneToMany(mappedBy = "cleaningRequest")
+    @OneToMany(mappedBy = "cleaningRequest", cascade = CascadeType.ALL)
     private List<Comment> comments;
     @Column(name = "status")
     private String status;
