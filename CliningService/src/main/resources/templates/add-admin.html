@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Добавление администратора</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Добавить администратора</h1>
-    <form action="#" th:action="@{/addAdmin}" th:object="${user}" method="post">
-        <input type="hidden" th:field="*{role}" value="admin">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Добавить администратора</h1>
+      <form
+        action="#"
+        th:action="@{/addAdmin}"
+        th:object="${user}"
+        method="post"
+      >
+        <input type="hidden" th:field="*{role}" value="admin" />
         <div class="form-group">
-            <label>Имя</label>
-            <input type="text" th:field="*{name}" class="form-control">
+          <label>Имя</label>
+          <input type="text" th:field="*{name}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Логин</label>
-            <input type="text" th:field="*{login}" class="form-control">
+          <label>Логин</label>
+          <input type="text" th:field="*{login}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" th:field="*{password}" class="form-control">
+          <label>Пароль</label>
+          <input type="password" th:field="*{password}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" th:field="*{email}" class="form-control">
+          <label>Email</label>
+          <input type="email" th:field="*{email}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Номер телефона</label>
-            <input type="tel" th:field="*{phoneNumber}" class="form-control">
+          <label>Номер телефона</label>
+          <input type="tel" th:field="*{phoneNumber}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>URL аватара</label>
-            <input type="text" th:field="*{avatarUrl}" class="form-control">
+          <label>URL аватара</label>
+          <input type="text" th:field="*{avatarUrl}" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
-</div>
-</body>
+      </form>
+    </div>
+  </body>
 </html>

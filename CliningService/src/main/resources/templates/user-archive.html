@@ -1,88 +1,113 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Мои заказы</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link " href="/profile">Мой профиль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-requests">Текущие заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/user-archive">Завершённые заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Мой профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-requests">Текущие заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/user-archive"
+                >Завершённые заявки</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Ваши предыдущие заявки:</h1>
-            <table class="table table-striped responsive-table">
-                <thead>
-                <tr>
-                    <th scope="col">№</th>
-                    <th scope="col">Услуга</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Статус заказа</th>
-                    <th scope="col">Дата</th>
-                    <th scope="col">Обратная связь</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="request, iterStat : ${requests}">
-                    <td th:text="${iterStat.count}"></td>
-                    <td th:text="${request.service.name}"></td>
-                    <td th:text="${request.service.description}"></td>
-                    <td th:text="${request.service.price + 'руб.'}"></td>
-                    <td th:text="${request.status}"></td>
-                    <td th:text="${request.dateTime}"></td>
-                    <td>
-                        <ul>
-                            <li th:each="comment : ${commentsForRequests.get(request)}">
-                                <span th:text="${comment.user.name}"></span>
-                                <span th:text="${comment.dateTime}"></span>
-                                <p th:text="${comment.content}"></p>
-                            </li>
-                        </ul>
-                        <form th:if="${!userCommented.get(request)}" th:action="@{/add-comment}" method="post"
-                              class="form-group">
-                            <input type="hidden" name="requestId" th:value="${request.id}"/>
-                            <label for="content" class="form-label mt-4">Оставить комментарий</label>
-                            <textarea name="content" class="form-control" id="content" rows="3"></textarea>
-                            <button class="btn button-best" data-action="modal" data-modal="modal" data-ym_goal="kalkul"
-                                    type="submit">
-                                Оставить комментарий
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <i class="fas fa-pencil-alt" onclick="showAlert()"></i>
-                        <i class="fas fa-times" onclick="showAlert()"></i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+          <h1>Ваши предыдущие заявки:</h1>
+          <table class="table table-striped responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">№</th>
+                <th scope="col">Услуга</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Статус заказа</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Обратная связь</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="request, iterStat : ${requests}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${request.service.name}"></td>
+                <td th:text="${request.service.description}"></td>
+                <td th:text="${request.service.price + 'руб.'}"></td>
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.dateTime}"></td>
+                <td>
+                  <ul>
+                    <li th:each="comment : ${commentsForRequests.get(request)}">
+                      <span th:text="${comment.user.name}"></span>
+                      <span th:text="${comment.dateTime}"></span>
+                      <p th:text="${comment.content}"></p>
+                    </li>
+                  </ul>
+                  <form
+                    th:if="${!userCommented.get(request)}"
+                    th:action="@{/add-comment}"
+                    method="post"
+                    class="form-group"
+                  >
+                    <input
+                      type="hidden"
+                      name="requestId"
+                      th:value="${request.id}"
+                    />
+                    <label for="content" class="form-label mt-4"
+                      >Оставить комментарий</label
+                    >
+                    <textarea
+                      name="content"
+                      class="form-control"
+                      id="content"
+                      rows="3"
+                    ></textarea>
+                    <button
+                      class="btn button-best"
+                      data-action="modal"
+                      data-modal="modal"
+                      data-ym_goal="kalkul"
+                      type="submit"
+                    >
+                      Оставить комментарий
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <i class="fas fa-pencil-alt" onclick="showAlert()"></i>
+                  <i class="fas fa-times" onclick="showAlert()"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-</div>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script>
-    function showAlert() {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+      function showAlert() {
         alert("Обратитесь к менеджеру по номеру телефона: +375(xx)xxx-xx-xx");
-    }
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>

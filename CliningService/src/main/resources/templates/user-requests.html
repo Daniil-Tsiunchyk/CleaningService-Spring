@@ -1,71 +1,78 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Мои заказы</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link " href="/profile">Мой профиль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/user-requests">Текущие заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-archive">Завершённые заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Мой профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/user-requests"
+                >Текущие заявки</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-archive">Завершённые заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Ваши предыдущие заявки:</h1>
-            <table class="table table-striped responsive-table">
-                <thead>
-                <tr>
-                    <th scope="col">№</th>
-                    <th scope="col">Услуга</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Статус заказа</th>
-                    <th scope="col">Дата</th>
-                    <th scope="col">Действия</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="request, iterStat : ${requests}">
-                    <td th:text="${iterStat.count}"></td>
-                    <td th:text="${request.service.name}"></td>
-                    <td th:text="${request.service.description}"></td>
-                    <td th:text="${request.service.price + 'руб.'}"></td>
-                    <td th:text="${request.status}"></td>
-                    <td th:text="${request.dateTime}"></td>
-                    <td>
-                        <i class="fas fa-pencil-alt" onclick="showAlert()"></i>
-                        <i class="fas fa-times" onclick="showAlert()"></i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+          <h1>Ваши предыдущие заявки:</h1>
+          <table class="table table-striped responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">№</th>
+                <th scope="col">Услуга</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Статус заказа</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="request, iterStat : ${requests}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${request.service.name}"></td>
+                <td th:text="${request.service.description}"></td>
+                <td th:text="${request.service.price + 'руб.'}"></td>
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.dateTime}"></td>
+                <td>
+                  <i class="fas fa-pencil-alt" onclick="showAlert()"></i>
+                  <i class="fas fa-times" onclick="showAlert()"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-</div>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script>
-    function showAlert() {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+      function showAlert() {
         alert("Обратитесь к менеджеру по номеру телефона: +375(xx)xxx-xx-xx");
-    }
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>

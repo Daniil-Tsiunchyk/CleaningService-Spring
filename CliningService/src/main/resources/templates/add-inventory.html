@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Добавление инвентаря</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Добавить инвентарь</h1>
-    <form action="#" th:action="@{/addInventory}" th:object="${inventory}" method="post">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Добавить инвентарь</h1>
+      <form
+        action="#"
+        th:action="@{/addInventory}"
+        th:object="${inventory}"
+        method="post"
+      >
         <div class="form-group">
-            <label>Название</label>
-            <input type="text" th:field="*{name}" class="form-control">
+          <label>Название</label>
+          <input type="text" th:field="*{name}" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Количество</label>
-            <input type="number" th:field="*{quantity}" min="1" step="1" max="1000" class="form-control">
+          <label>Количество</label>
+          <input
+            type="number"
+            th:field="*{quantity}"
+            min="1"
+            step="1"
+            max="1000"
+            class="form-control"
+          />
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
-</div>
-</body>
+      </form>
+    </div>
+  </body>
 </html>

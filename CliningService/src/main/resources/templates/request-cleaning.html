@@ -1,67 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Оставить заявку на клининг</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link " href="/profile">Мой профиль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/request-cleaning">Оставить заявку</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-requests">Текущие заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-archive">Завершённые заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Мой профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/request-cleaning"
+                >Оставить заявку</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-requests">Текущие заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-archive">Завершённые заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Оставить заявку на клининг</h1>
-            <form action="/request-cleaning" method="get">
-                <div class="form-group">
-                    <label for="serviceSelect">Выберите услугу</label>
-                    <select class="form-control" id="serviceSelect" name="serviceId" onchange="this.form.submit()"
-                            required>
-                        <option disabled selected value="">Выберите услугу...</option>
-                        <option th:each="service : ${services}"
-                                th:classappend="${selectedService != null && service.id == selectedService.id} ? 'selected-service' : ''"
-                                th:text="${service.name}"
-                                th:value="${service.id}"></option>
-                    </select>
-                </div>
-                <div class="form-group" th:if="${selectedService != null}">
-                    <label for="serviceDescription">Описание услуги:</label>
-                    <p th:text="${selectedService.description}"></p>
-                    <label for="servicePrice">Цена:</label>
-                    <p th:text="${selectedService.price+'руб.'}"></p>
-                </div>
-            </form>
-            <form action="/submitRequest" method="post" th:if="${selectedService != null}">
-                <input name="serviceId" th:value="${selectedService.id}" type="hidden">
-                <div class="form-group">
-                    <label for="datetimeInput">Дата и время</label>
-                    <input class="form-control" id="datetimeInput" name="dateTime" required type="datetime-local"
-                           th:min="${now}" th:max="${monthAhead}">
-                </div>
-                <button class="btn button-best" data-action="modal" data-modal="modal" data-ym_goal="kalkul"
-                        type="submit">
-                    Оставить заявку
-                </button>
-            </form>
+          <h1>Оставить заявку на клининг</h1>
+          <form action="/request-cleaning" method="get">
+            <div class="form-group">
+              <label for="serviceSelect">Выберите услугу</label>
+              <select
+                class="form-control"
+                id="serviceSelect"
+                name="serviceId"
+                onchange="this.form.submit()"
+                required
+              >
+                <option disabled selected value="">Выберите услугу...</option>
+                <option
+                  th:each="service : ${services}"
+                  th:classappend="${selectedService != null && service.id == selectedService.id} ? 'selected-service' : ''"
+                  th:text="${service.name}"
+                  th:value="${service.id}"
+                ></option>
+              </select>
+            </div>
+            <div class="form-group" th:if="${selectedService != null}">
+              <label for="serviceDescription">Описание услуги:</label>
+              <p th:text="${selectedService.description}"></p>
+              <label for="servicePrice">Цена:</label>
+              <p th:text="${selectedService.price+'руб.'}"></p>
+            </div>
+          </form>
+          <form
+            action="/submitRequest"
+            method="post"
+            th:if="${selectedService != null}"
+          >
+            <input
+              name="serviceId"
+              th:value="${selectedService.id}"
+              type="hidden"
+            />
+            <div class="form-group">
+              <label for="datetimeInput">Дата и время</label>
+              <input
+                class="form-control"
+                id="datetimeInput"
+                name="dateTime"
+                required
+                type="datetime-local"
+                th:min="${now}"
+                th:max="${monthAhead}"
+              />
+            </div>
+            <button
+              class="btn button-best"
+              data-action="modal"
+              data-modal="modal"
+              data-ym_goal="kalkul"
+              type="submit"
+            >
+              Оставить заявку
+            </button>
+          </form>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Добавление сотрудника</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Добавить сотрудника</h1>
-    <form action="#" th:action="@{/addEmployee}" th:object="${employee}" method="post">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Добавить сотрудника</h1>
+      <form
+        action="#"
+        th:action="@{/addEmployee}"
+        th:object="${employee}"
+        method="post"
+      >
         <div class="form-group">
-            <label>Имя</label>
-            <input type="text" th:field="*{name}" class="form-control">
+          <label>Имя</label>
+          <input type="text" th:field="*{name}" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
-</div>
-</body>
+      </form>
+    </div>
+  </body>
 </html>

@@ -1,79 +1,98 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Пользователи</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-requests">Заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-services">Услуги</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/table-users">Пользователи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-inventory">Инвентарь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-employees">Персонал</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/table-requests">Заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-services">Услуги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/table-users">Пользователи</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-inventory">Инвентарь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-employees">Персонал</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Пользователи</h1>
-            <a class="btn btn-primary" href="/add-admin">Добавить администратора</a>
+          <h1>Пользователи</h1>
+          <a class="btn btn-primary" href="/add-admin"
+            >Добавить администратора</a
+          >
 
-
-            <form action="/table-users" method="get">
-                <div class="form-group">
-                    <label for="userSelect">Выберите пользователя</label>
-                    <select class="form-control" id="userSelect" name="userId" onchange="this.form.submit()" required>
-                        <option disabled selected value="">Выберите пользователя...</option>
-                        <option th:each="user : ${users}"
-                                th:classappend="${selectedUser != null && user.id == selectedUser.id} ? 'selected-user' : ''"
-                                th:selected="${selectedUser != null && user.id == selectedUser.id}"
-                                th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"
-                                th:value="${user.id}"></option>
-                    </select>
-                </div>
-                <div class="form-group" th:if="${selectedUser != null}">
-                    <label>Имя:</label>
-                    <p th:text="${selectedUser.name}"></p>
-                    <label>Email:</label>
-                    <p th:text="${selectedUser.email}"></p>
-                    <label>Номер телефона:</label>
-                    <p th:text="${selectedUser.phoneNumber}"></p>
-                    <label>Роль:</label>
-                    <p th:text="${selectedUser.role}"></p>
-                    <label>Аватар:</label>
-                    <img th:src="@{'/' + ${selectedUser.avatarUrl}}" alt="User Avatar" width="100" height="100"/>
-                </div>
-            </form>
-            <!--            <form action="/deleteUser" method="post">-->
-            <!--                <div class="form-group">-->
-            <!--                    <label for="userDeleteSelect">Удалить пользователя</label>-->
-            <!--                    <select class="form-control" id="userDeleteSelect" name="userId" onchange="this.form.submit()"-->
-            <!--                            required>-->
-            <!--                        <option disabled selected value="">Выберите пользователя...</option>-->
-            <!--                        <option th:each="user : ${users}"-->
-            <!--                                th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"-->
-            <!--                                th:value="${user.id}"></option>-->
-            <!--                    </select>-->
-            <!--                </div>-->
-            <!--            </form>-->
+          <form action="/table-users" method="get">
+            <div class="form-group">
+              <label for="userSelect">Выберите пользователя</label>
+              <select
+                class="form-control"
+                id="userSelect"
+                name="userId"
+                onchange="this.form.submit()"
+                required
+              >
+                <option disabled selected value="">
+                  Выберите пользователя...
+                </option>
+                <option
+                  th:each="user : ${users}"
+                  th:classappend="${selectedUser != null && user.id == selectedUser.id} ? 'selected-user' : ''"
+                  th:selected="${selectedUser != null && user.id == selectedUser.id}"
+                  th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"
+                  th:value="${user.id}"
+                ></option>
+              </select>
+            </div>
+            <div class="form-group" th:if="${selectedUser != null}">
+              <label>Имя:</label>
+              <p th:text="${selectedUser.name}"></p>
+              <label>Email:</label>
+              <p th:text="${selectedUser.email}"></p>
+              <label>Номер телефона:</label>
+              <p th:text="${selectedUser.phoneNumber}"></p>
+              <label>Роль:</label>
+              <p th:text="${selectedUser.role}"></p>
+              <label>Аватар:</label>
+              <img
+                th:src="@{'/' + ${selectedUser.avatarUrl}}"
+                alt="User Avatar"
+                width="100"
+                height="100"
+              />
+            </div>
+          </form>
+          <!--            <form action="/deleteUser" method="post">-->
+          <!--                <div class="form-group">-->
+          <!--                    <label for="userDeleteSelect">Удалить пользователя</label>-->
+          <!--                    <select class="form-control" id="userDeleteSelect" name="userId" onchange="this.form.submit()"-->
+          <!--                            required>-->
+          <!--                        <option disabled selected value="">Выберите пользователя...</option>-->
+          <!--                        <option th:each="user : ${users}"-->
+          <!--                                th:text="${user.name + ' - ' + user.email + ' - ' + user.role}"-->
+          <!--                                th:value="${user.id}"></option>-->
+          <!--                    </select>-->
+          <!--                </div>-->
+          <!--            </form>-->
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

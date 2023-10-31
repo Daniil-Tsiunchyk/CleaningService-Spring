@@ -1,60 +1,89 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Мой профиль</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/profile">Мой профиль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-requests">Текущие заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-archive">Завершённые заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/profile">Мой профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/request-cleaning">Оставить заявку</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-requests">Текущие заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user-archive">Завершённые заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Мой профиль</h1>
-            <form th:action="@{/update-profile}" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label>Текущий аватар</label>
-                    <img th:src="@{'/' + ${user.avatarUrl}}" alt="User Avatar" width="100" height="100"/>
-                </div>
-                <div class="form-group">
-                    <label>Имя пользователя</label>
-                    <input type="text" class="form-control" th:value="${user.name}" readonly/>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" th:value="${user.email}" readonly/>
-                </div>
-                <div class="form-group">
-                    <label>Номер телефона</label>
-                    <input type="text" name="phoneNumber" class="form-control" th:value="${user.phoneNumber}"
-                           placeholder="Введите номер телефона"/>
-                </div>
-                <div class="form-group">
-                    <label>Загрузить аватар</label>
-                    <input type="file" name="avatar" class="form-control"/>
-                </div>
-                <button type="submit" class="btn btn-primary">Обновить профиль</button>
-            </form>
+          <h1>Мой профиль</h1>
+          <form
+            th:action="@{/update-profile}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label>Текущий аватар</label>
+              <img
+                th:src="@{'/' + ${user.avatarUrl}}"
+                alt="User Avatar"
+                width="100"
+                height="100"
+              />
+            </div>
+            <div class="form-group">
+              <label>Имя пользователя</label>
+              <input
+                type="text"
+                class="form-control"
+                th:value="${user.name}"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                th:value="${user.email}"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label>Номер телефона</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                class="form-control"
+                th:value="${user.phoneNumber}"
+                placeholder="Введите номер телефона"
+              />
+            </div>
+            <div class="form-group">
+              <label>Загрузить аватар</label>
+              <input type="file" name="avatar" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Обновить профиль
+            </button>
+          </form>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

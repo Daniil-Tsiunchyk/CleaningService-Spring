@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Список инвентаря</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-requests">Заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-services">Услуги</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-users">Пользователи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/table-inventory">Инвентарь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-employees">Персонал</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/table-requests">Заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-services">Услуги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-users">Пользователи</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/table-inventory">Инвентарь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-employees">Персонал</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Список инвентаря</h1>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Название</th>
-                    <th>Количество</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="inventory, iterStat : ${inventories}">
-                    <td th:text="${iterStat.count}"></td>
-                    <td th:text="${inventory.name}"></td>
-                    <td th:text="${inventory.quantity}"></td>
-                    <td>
-                        <a th:href="@{/edit-inventory/{id}(id=${inventory.id})}" class="btn btn-primary">Редактировать</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/delete-inventory/{id}(id=${inventory.id})}" class="btn btn-danger">Удалить</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <a href="/addInventory" class="btn btn-success">Добавить инвентарь</a>
+          <h1>Список инвентаря</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Количество</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="inventory, iterStat : ${inventories}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${inventory.name}"></td>
+                <td th:text="${inventory.quantity}"></td>
+                <td>
+                  <a
+                    th:href="@{/edit-inventory/{id}(id=${inventory.id})}"
+                    class="btn btn-primary"
+                    >Редактировать</a
+                  >
+                </td>
+                <td>
+                  <a
+                    th:href="@{/delete-inventory/{id}(id=${inventory.id})}"
+                    class="btn btn-danger"
+                    >Удалить</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="/addInventory" class="btn btn-success">Добавить инвентарь</a>
         </div>
+      </div>
     </div>
-</div>
-
-</body>
+  </body>
 </html>

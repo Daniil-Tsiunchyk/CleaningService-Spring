@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Редактирование заявки</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Редактировать заявку</h1>
-    <form th:action="@{/edit-request/{id}(id=${request.id})}" th:object="${request}" method="post">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Редактировать заявку</h1>
+      <form
+        th:action="@{/edit-request/{id}(id=${request.id})}"
+        th:object="${request}"
+        method="post"
+      >
         <div class="form-group">
-            <label for="dateTime">Дата и время</label>
-            <input type="text" th:field="*{dateTime}" id="dateTime" class="form-control"/>
+          <label for="dateTime">Дата и время</label>
+          <input
+            type="text"
+            th:field="*{dateTime}"
+            id="dateTime"
+            class="form-control"
+          />
         </div>
         <div class="form-group">
-            <label for="status">Статус</label>
-            <select class="form-control" id="status" th:field="*{status}">
-                <option th:each="status : ${statusList}" th:value="${status}" th:text="${status}"></option>
-            </select>
+          <label for="status">Статус</label>
+          <select class="form-control" id="status" th:field="*{status}">
+            <option
+              th:each="status : ${statusList}"
+              th:value="${status}"
+              th:text="${status}"
+            ></option>
+          </select>
         </div>
         <div class="form-group">
-            <label for="employee">Работник</label>
-            <select class="form-control" id="employee" th:field="*{employee.id}">
-                <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
-            </select>
+          <label for="employee">Работник</label>
+          <select class="form-control" id="employee" th:field="*{employee.id}">
+            <option
+              th:each="employee : ${employees}"
+              th:value="${employee.id}"
+              th:text="${employee.name}"
+            ></option>
+          </select>
         </div>
         <div class="form-group">
-            <label for="inventory">Инвентарь</label>
-            <select class="form-control" id="inventory" th:field="*{inventory.id}">
-                <option th:each="inventory : ${inventories}" th:value="${inventory.id}" th:text="${inventory.name}"></option>
-            </select>
+          <label for="inventory">Инвентарь</label>
+          <select
+            class="form-control"
+            id="inventory"
+            th:field="*{inventory.id}"
+          >
+            <option
+              th:each="inventory : ${inventories}"
+              th:value="${inventory.id}"
+              th:text="${inventory.name}"
+            ></option>
+          </select>
         </div>
-        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
-    </form>
-</div>
-</body>
+        <button type="submit" class="btn btn-primary">
+          Сохранить изменения
+        </button>
+      </form>
+    </div>
+  </body>
 </html>

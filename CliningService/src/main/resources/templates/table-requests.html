@@ -1,112 +1,132 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Список заявок</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
-        .table-responsive {
-            overflow-x: auto;
-        }
+      .table-responsive {
+        overflow-x: auto;
+      }
     </style>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/table-requests">Заявки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="/table-services">Услуги</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-users">Пользователи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-inventory">Инвентарь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/table-employees">Персонал</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Выйти</a>
-                </li>
-            </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/table-requests">Заявки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-services">Услуги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-users">Пользователи</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-inventory">Инвентарь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/table-employees">Персонал</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Выйти</a>
+            </li>
+          </ul>
         </div>
         <div class="col-sm-9">
-            <h1>Список заявок</h1>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>Дата</th>
-                        <th>Услуга</th>
-                        <th>Пользователь</th>
-                        <th>Статус</th>
-                        <th>Работники</th>
-                        <th>Инвентарь</th>
-                        <th>Действия</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="request, iterStat : ${requests}">
-                        <td th:text="${iterStat.count}"></td>
-                        <td th:text="${request.dateTime}"></td>
-                        <td th:text="${request.service != null ? request.service.name : ''}"></td>
-                        <td th:text="${request.user.name}"></td>
-                        <form action="/editRequest" method="post">
-                            <td>
-                                <select class="form-control" name="status">
-                                    <option th:each="status : ${statusList}"
-                                            th:selected="${status.equals(request.status)}"
-                                            th:text="${status}"
-                                            th:value="${status}"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="employee">
-                                    <option th:each="employee : ${employees}"
-                                            th:selected="${request.employee != null && employee.id.equals(request.employee.id)}"
-                                            th:text="${employee.name}"
-                                            th:value="${employee.id}"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="inventory">
-                                    <option th:each="inventory : ${inventories}"
-                                            th:selected="${request.inventory != null && inventory.id.equals(request.inventory.id)}"
-                                            th:text="${inventory.name}"
-                                            th:value="${inventory.id}"></option>
-                                </select>
-                            </td>
-                            <input type="hidden" name="requestId" th:value="${request.id}">
-<!--                            <td>-->
-<!--                                <button type="submit" class="btn btn-primary">Обновить</button>-->
-<!--                            </td>-->
-                        </form>
-                        <td>
-                            <a th:href="@{/edit-request/{id}(id=${request.id})}">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <form th:action="@{/delete-request/{id}(id=${request.id})}" method="post">
-                                <button type="submit" style="background: none; border: none;">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+          <h1>Список заявок</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Дата</th>
+                  <th>Услуга</th>
+                  <th>Пользователь</th>
+                  <th>Статус</th>
+                  <th>Работники</th>
+                  <th>Инвентарь</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="request, iterStat : ${requests}">
+                  <td th:text="${iterStat.count}"></td>
+                  <td th:text="${request.dateTime}"></td>
+                  <td
+                    th:text="${request.service != null ? request.service.name : ''}"
+                  ></td>
+                  <td th:text="${request.user.name}"></td>
+                  <form action="/editRequest" method="post">
+                    <td>
+                      <select class="form-control" name="status">
+                        <option
+                          th:each="status : ${statusList}"
+                          th:selected="${status.equals(request.status)}"
+                          th:text="${status}"
+                          th:value="${status}"
+                        ></option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="form-control" name="employee">
+                        <option
+                          th:each="employee : ${employees}"
+                          th:selected="${request.employee != null && employee.id.equals(request.employee.id)}"
+                          th:text="${employee.name}"
+                          th:value="${employee.id}"
+                        ></option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="form-control" name="inventory">
+                        <option
+                          th:each="inventory : ${inventories}"
+                          th:selected="${request.inventory != null && inventory.id.equals(request.inventory.id)}"
+                          th:text="${inventory.name}"
+                          th:value="${inventory.id}"
+                        ></option>
+                      </select>
+                    </td>
+                    <input
+                      type="hidden"
+                      name="requestId"
+                      th:value="${request.id}"
+                    />
+                  </form>
+                  <td>
+                    <a th:href="@{/edit-request/{id}(id=${request.id})}">
+                      <i class="fas fa-pencil-alt"></i>
+                    </a>
+                  </td>
+                  <td>
+                    <form
+                      th:action="@{/delete-request/{id}(id=${request.id})}"
+                      method="post"
+                    >
+                      <button
+                        type="submit"
+                        style="background: none; border: none"
+                      >
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

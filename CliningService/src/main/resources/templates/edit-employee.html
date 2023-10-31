@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Редактирование сотрудника</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Редактировать сотрудника</h1>
-    <form action="#" th:action="@{/edit-employee.html}" th:object="${employee}" method="post">
-        <input type="hidden" th:field="*{id}">
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Редактировать сотрудника</h1>
+      <form
+        action="#"
+        th:action="@{/edit-employee.html}"
+        th:object="${employee}"
+        method="post"
+      >
+        <input type="hidden" th:field="*{id}" />
         <div class="form-group">
-            <label>Имя</label>
-            <input type="text" th:field="*{name}" class="form-control">
+          <label>Имя</label>
+          <input type="text" th:field="*{name}" class="form-control" />
         </div>
         <a href="/table-employees" class="btn btn-secondary">Назад</a>
         <button type="submit" class="btn btn-primary">Обновить</button>
-    </form>
-</div>
-</body>
+      </form>
+    </div>
+  </body>
 </html>
